@@ -5,9 +5,20 @@ import getUserUrlStats from "../../services/getUserUrlStats";
 
 const options = {
   responsive: true,
+  maintainAspectRatio: false,
   title: {
     display: false,
     text: "link Statistics",
+  },
+  scales: {
+    display: false,
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: false,
+        },
+      },
+    ],
   },
   plugins: {
     legend: {
@@ -23,6 +34,7 @@ const StatisticsChart = () => {
   const [totalClicks, setTotalClicks] = useState(0);
 
   const fetchData = async () => {
+    console.log("hello");
     const responseData = await getUserUrlStats(statsCase);
     setTotalClicks(responseData.data.reduce((a, b) => a + b, 0));
     setChartData({
